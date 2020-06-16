@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.arnis.dh.ui.main.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+    </fragment>
+    <fragment
+        android:id="@+id/previewFragment"
+        android:name="com.arnis.dh.ui.preview.PreviewFragment"
+        android:label="fragment_preview"
+        tools:layout="@layout/fragment_preview" >
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="foodora://product/{id}" />
+    </fragment>
+    <action
+        android:id="@+id/action_preview"
+        app:destination="@+id/previewFragment"
+        app:enterAnim="@anim/fragment_fade_enter"
+        app:exitAnim="@anim/fragment_close_exit"
+        app:launchSingleTop="true"
+        app:popEnterAnim="@anim/fragment_open_enter"
+        app:popExitAnim="@anim/fragment_fade_exit" />
+</navigation>

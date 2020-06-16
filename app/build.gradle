@@ -1,0 +1,57 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlinx-serialization'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion buildConfig.targetSdk
+    buildToolsVersion buildConfig.buildTools
+    defaultConfig {
+        applicationId "com.arnis.dh"
+        minSdkVersion buildConfig.minSdk
+        targetSdkVersion buildConfig.targetSdk
+        versionCode 1
+        versionName "1.0.0"
+    }
+    buildTypes {
+        debug {
+            minifyEnabled false
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    tasks.withType(KotlinCompile) {
+        kotlinOptions {
+            jvmTarget = "1.8"
+        }
+    }
+}
+
+dependencies {
+    implementation deps.kotlin.stdlib
+    implementation deps.kotlin.kserialize.android
+    implementation deps.kotlin.coroutines.core
+    implementation deps.kotlin.coroutines.android
+    implementation deps.android.appCompat
+    implementation deps.android.constraint
+    implementation deps.android.design
+    implementation deps.android.swiperefresh
+    implementation deps.android.palette
+    implementation deps.android.nav.fragment
+    implementation deps.android.nav.ui
+    implementation deps.android.room.runtime
+    kapt deps.android.room.annotation
+    implementation deps.android.room.ktx
+    implementation deps.koin.core
+    implementation deps.koin.android
+    implementation deps.okhttp
+    implementation deps.glide
+}
